@@ -1,0 +1,132 @@
+# 单个帖子(视频/图集/音乐)提取接口文档 📄
+
+> API 基于 REST 架构设计。API 具有结构清晰的面向资源的 URL，接收 JSON 格式的请求体，返回 JSON 格式的响应，并使用标准的 HTTP 响应状态码。
+
+该接口为单个帖子(视频/图集/音乐等)提取接口，哼哼猫支持的平台(999+)，该接口都支持。
+
+### 请求参数
+
+**接口地址:** `https://api.meowload.net/openapi/extract/post`
+
+**请求方式:** `POST`
+
+**请求 Content-Type:** `application/json`
+
+**请求头(Header)**
+
+| 请求头            | 说明                                                                            |
+| :---------------- | :------------------------------------------------------------------------------ |
+| `x-api-key`       | API-Key，在[开发者接口管理](https://www.henghengmao.com/user/developer)页面获取 |
+| `accept-language` | 错误返回时 message 的语言，默认`en`，支持`zh`、`en`、`ja`、`es`、`de`等         |
+
+**请求参数(Body)**
+
+| 参数  | 说明                 |
+| ----- | -------------------- |
+| `url` | 单个帖子分享链接地址 |
+
+### 🟢 成功返回数据示例
+
+> HTTP 状态码为 200
+
+```json
+{
+  "text": "Introducing Opera One https://t.co/ABHoIW116d",
+  "medias": [
+    {
+      "media_type": "video",
+      "resource_url": "https://video.twimg.com/ext_tw_video/1650757905975595010/pu/vid/1280x720/HhaDnQS7feVgqhAN.mp4?tag=12",
+      "preview_url": "https://pbs.twimg.com/ext_tw_video_thumb/1650757905975595010/pu/img/t5yBiZFRPAIa_4Pi.jpg"
+    },
+    {
+      "media_type": "image",
+      "resource_url": "https://you.net/v/8097271834853567236_n.jpg",
+      "preview_url": null
+    },
+    {
+      "media_type": "audio",
+      "resource_url": "https://you.com/8AF5905EB8EE07DACD0.m4a",
+      "preview_url": "https://you.com/000I5jJB3blWeN.jpg",
+      "headers": {
+        "Referer": "https://www.you.com/",
+        "User-Agent": "Mozilla/2.0 (compatible; MSIE Version; Operating System)"
+      }
+    }
+  ],
+  "id": "1650758247739949056",
+  "created_at": "Tue Apr 25 07:06:50 +0000 2023"
+}
+```
+
+<details>
+<summary>💡 部分网站的视频会包含多个清晰度版本，比如YouTube、Facebook等 [点击展开查看] 👈</summary>
+
+```json
+{
+  "text": "10个PC必装的免费软件，既个性又好用",
+  "medias": [
+    {
+      "media_type": "video",
+      "resource_url": "https://googlevideo.com/videoplayback?ei=L92YYsOeF9nbkgatuKvoDg",
+      "preview_url": "https://i.ytimg.com/vi/WKSZXFvpu5Q/maxresdefault.jpg",
+      "formats": [
+        {
+          "quality": 2160,
+          "video_url": "https://googlevideo.com/pl5h1V3m4CIQCO6O9Dk.webm",
+          "video_ext": "webm",
+          "video_size": 24532741513,
+          "audio_url": "https://googlevideo.com/V3m4CIQCO6O9Dk7TPDllq.m4a",
+          "audio_ext": "m4a",
+          "audio_size": 221231911,
+          "separate": 1,
+          "quality_note": "4K"
+        },
+        {
+          "quality": 1440,
+          "video_url": "https://googlevideo.com/QCO6O9Dk7TPDllq.webm",
+          "video_ext": "webm",
+          "video_size": 12547654223,
+          "audio_url": "https://.googlevideo.com/V3m4CIQCO6O.m4a",
+          "audio_ext": "m4a",
+          "audio_size": 221231911,
+          "separate": 1,
+          "quality_note": "2K"
+        },
+        {
+          "quality": 1080,
+          "video_url": "https://googlevideo.com/V3m4CIQCO6O9Dk7.mp4",
+          "video_ext": "mp4",
+          "video_size": 5995725852,
+          "audio_url": "https://googlevideo.com/IQCO6O9Dk7TP.m4a",
+          "audio_ext": "m4a",
+          "audio_size": 221231911,
+          "separate": 1,
+          "quality_note": "HD"
+        },
+        {
+          "quality": 720,
+          "video_url": "https://googlevideo.com/m4CIQCO6O9Dk7TPDllq.mp4",
+          "video_ext": "mp4",
+          "video_size": 2849049722,
+          "audio_url": null,
+          "audio_ext": null,
+          "audio_size": 0,
+          "separate": 0,
+          "quality_note": null
+        },
+        {
+          "quality": 480,
+          "video_url": "https://googlevideo.com/V3m4CIQCO6O9Dk7T.mp4",
+          "video_ext": "mp4",
+          "video_size": 1306363594,
+          "audio_url": "https://googlevideo.com/JFTso7rYNu_Qtjpl5h1V.m4a",
+          "audio_ext": "m4a",
+          "audio_size": 221231911,
+          "separate": 1,
+          "quality_note": null
+        }
+      ]
+    }
+  ]
+}
+```
