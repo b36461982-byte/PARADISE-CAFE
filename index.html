@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>中岛美雪资料站</title>
+    <title>PARADISE CAFE</title>
     <style>
         * {
             margin: 0;
@@ -12,162 +12,87 @@
         }
 
         body {
-            font-family: 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4facfe 100%);
             min-height: 100vh;
-            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        header {
+        .header {
             text-align: center;
-            padding: 60px 20px 40px;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
+            margin-bottom: 60px;
         }
 
-        h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-            letter-spacing: 2px;
+        .header h1 {
+            font-size: 4em;
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            letter-spacing: 8px;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
             gap: 30px;
-            margin-top: 40px;
+            max-width: 1200px;
+            width: 100%;
         }
 
-        .card {
+        .section {
+            flex: 1;
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
-            border-radius: 15px;
+            border-radius: 20px;
             padding: 40px 30px;
             text-align: center;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .card:hover {
+        .section:hover {
             transform: translateY(-10px);
             background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
-        .card-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
-
-        .card-title {
-            font-size: 1.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .card-desc {
-            font-size: 0.9em;
-            opacity: 0.8;
-        }
-
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 60px;
-            background: rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        footer p {
-            opacity: 0.8;
+        .section h2 {
+            font-size: 2em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         @media (max-width: 768px) {
-            h1 {
-                font-size: 2em;
+            .container {
+                flex-direction: column;
             }
-            
-            .grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 20px;
+
+            .header h1 {
+                font-size: 2.5em;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>中島みゆき</h1>
-        <p class="subtitle">中岛美雪 资料站</p>
-    </header>
-
-    <div class="container">
-        <div class="grid">
-            <div class="card" onclick="alert('专辑页面开发中...')">
-                <div class="card-icon">💿</div>
-                <div class="card-title">专辑</div>
-                <div class="card-desc">Studio Albums</div>
-            </div>
-
-            <div class="card" onclick="alert('夜会页面开发中...')">
-                <div class="card-icon">🎭</div>
-                <div class="card-title">夜会</div>
-                <div class="card-desc">Yakai Series</div>
-            </div>
-
-            <div class="card" onclick="alert('现场页面开发中...')">
-                <div class="card-icon">🎤</div>
-                <div class="card-title">现场</div>
-                <div class="card-desc">Live Concerts</div>
-            </div>
-
-            <div class="card" onclick="alert('MV页面开发中...')">
-                <div class="card-icon">🎬</div>
-                <div class="card-title">MV</div>
-                <div class="card-desc">Music Videos</div>
-            </div>
-
-            <div class="card" onclick="alert('单曲页面开发中...')">
-                <div class="card-icon">🎵</div>
-                <div class="card-title">单曲</div>
-                <div class="card-desc">Singles</div>
-            </div>
-
-            <div class="card" onclick="alert('文献页面开发中...')">
-                <div class="card-icon">📚</div>
-                <div class="card-title">文献</div>
-                <div class="card-desc">Documents</div>
-            </div>
-
-            <div class="card" onclick="alert('介绍页面开发中...')">
-                <div class="card-icon">👤</div>
-                <div class="card-title">介绍</div>
-                <div class="card-desc">Biography</div>
-            </div>
-
-            <div class="card" onclick="alert('News页面开发中...')">
-                <div class="card-icon">📰</div>
-                <div class="card-title">News</div>
-                <div class="card-desc">Latest Updates</div>
-            </div>
-        </div>
+    <div class="header">
+        <h1>PARADISE CAFE</h1>
     </div>
 
-    <footer>
-        <p>© 2026—2085 中岛美雪资料站 | 非官方粉丝项目</p>
-        <p style="margin-top: 10px; font-size: 0.9em;">本站资料仅供学习交流，版权归原作者所有</p>
-    </footer>
+    <div class="container">
+        <div class="section">
+            <h2>rockinsuit</h2>
+        </div>
+
+        <div class="section">
+            <h2>パラダイス・カフェ</h2>
+        </div>
+
+        <div class="section">
+            <h2>中島みゆき研究所</h2>
+        </div>
+    </div>
 </body>
 </html>
