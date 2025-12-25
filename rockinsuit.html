@@ -12,67 +12,159 @@
         }
 
         body {
-            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4facfe 100%);
+            font-family: 'KaiTi', '楷体', 'STKaiti', serif;
+            background: #e8e4d9;
             min-height: 100vh;
             padding: 40px 20px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 50px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-
-        h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 30px;
+        .header {
             text-align: center;
+            margin-bottom: 50px;
         }
 
-        .content {
-            color: #333;
-            font-size: 1.1em;
-            line-height: 1.8;
-            text-align: justify;
-        }
-
-        .content p {
+        .header h1 {
+            font-size: 3em;
+            color: #000;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 20px;
+        }
+
+        .intro {
+            max-width: 900px;
+            margin: 0 auto 50px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .intro p {
+            color: #333;
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: rgba(139, 115, 85, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 115, 85, 0.3);
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            background: rgba(139, 115, 85, 0.25);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .section a {
+            display: block;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .section h2 {
+            font-size: 1.8em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
         .back-btn {
             display: inline-block;
-            margin-top: 30px;
+            margin: 30px auto;
             padding: 12px 30px;
-            background: #667eea;
-            color: white;
+            background: rgba(0, 0, 0, 0.1);
+            color: #000;
             text-decoration: none;
             border-radius: 25px;
             transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .back-btn:hover {
-            background: #764ba2;
+            background: rgba(0, 0, 0, 0.15);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="header">
         <h1>rockinsuit</h1>
-        <div class="content">
-            <p>西装下的摇滚（rockinsuit.cn）是一个介绍中島美雪音乐、表演与作品的个人小站。由Town Way成立于2015年1月。</p>
-            
-            <p>2025年12月8日，我发现rockinsuit不知道为什么打不开了，站长失联，据year群群友推测可能是域名到期，没有续费导致的结果，于是等待两周后，我通过Wayback machine将原网站的所有资料内容保存到本地，准备放在新成立的网站上，如今，这些珍贵的资料将在新的站点得以延续。在此致敬不知所终的Town Way先生，希望他一切都好。</p>
-        </div>
-        
-        <a href="index.html" class="back-btn">返回首页</a>
     </div>
+
+    <div class="intro">
+        <p>西装下的摇滚（rockinsuit.cn）是一个介绍中島美雪音乐、表演与作品的个人小站。由Town Way成立于2015年1月。</p>
+        
+        <p>2025年12月8日，我发现rockinsuit不知道为什么打不开了，站长失联，据year群群友推测可能是域名到期，没有续费导致的结果，于是等待两周后，我通过Wayback machine将原网站的所有资料内容保存到本地，准备放在新成立的网站上，如今，这些珍贵的资料将在新的站点得以延续。在此致敬不知所终的Town Way先生，希望他一切都好。</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <a href="#">
+                <h2>夜会</h2>
+            </a>
+        </div>
+
+        <div class="section">
+            <a href="#">
+                <h2>现场</h2>
+            </a>
+        </div>
+
+        <div class="section">
+            <a href="#">
+                <h2>MV</h2>
+            </a>
+        </div>
+
+        <div class="section">
+            <a href="#">
+                <h2>文献</h2>
+            </a>
+        </div>
+
+        <div class="section">
+            <a href="#">
+                <h2>介绍</h2>
+            </a>
+        </div>
+
+        <div class="section">
+            <a href="#">
+                <h2>News</h2>
+            </a>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-btn">返回首页</a>
 </body>
 </html>
