@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>介绍 - rockinsuit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'KaiTi', '楷体', 'STKaiti', serif;
+            background: #e8e4d9;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #000;
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .article-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .article-item {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .article-item:hover {
+            background: rgba(255, 255, 255, 0.85);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .article-item a {
+            text-decoration: none;
+            color: #000;
+            display: block;
+        }
+
+        .article-item h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .article-item p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.8;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background: rgba(0, 0, 0, 0.1);
+            color: #000;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover {
+            background: rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>介绍</h1>
+        
+        <div class="article-list">
+            <div class="article-item">
+                <a href="rockinsuit-intro.html">
+                    <h2>关于rockinsuit</h2>
+                    <p>西装下的摇滚（rockinsuit.cn）是一个介绍中島美雪音乐、表演与作品的个人小站。由Town Way成立于2015年1月...</p>
+                </a>
+            </div>
+
+            <div class="article-item">
+                <a href="miyuki-interview.html">
+                    <h2>中島美雪怎麼寫歌</h2>
+                    <p>關於她新專輯『CONTRALTO』的10回對談。糸井重里与中島美雪事隔九年的深度对谈...</p>
+                </a>
+            </div>
+        </div>
+
+        <a href="rockinsuit.html" class="back-btn">返回</a>
+    </div>
+</body>
+</html>
