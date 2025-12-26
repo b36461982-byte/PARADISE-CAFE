@@ -13,298 +13,305 @@
         }
 
         body {
-            font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'Meiryo', sans-serif;
-            color: white;
+            font-family: 'Segoe UI', 'Hiragino Sans', sans-serif;
+            color: #ffffff;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* 太空画布 */
+        #space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
             background: #000;
         }
 
-        /* 太空背景 */
-        #space-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(ellipse at center, rgba(13, 27, 79, 0.7) 0%, rgba(0, 0, 0, 1) 100%),
-                url('https://images.unsplash.com/photo-1502134249126-9f3755a50d78?q=80&w=2070');
-            background-size: cover;
-            background-position: center;
-            animation: starTwinkle 8s infinite alternate;
-        }
-
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
-
-        /* 星星效果 */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .star {
+        /* 银河系 */
+        .milky-way {
             position: absolute;
-            background-color: white;
+            top: 20%;
+            left: 10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, 
+                rgba(255,255,255,0.03) 0%,
+                rgba(100,100,255,0.02) 30%,
+                rgba(50,50,150,0.01) 60%,
+                transparent 100%);
             border-radius: 50%;
-            animation: twinkle var(--duration) infinite alternate;
+            opacity: 0.3;
+            animation: rotateGalaxy 300s linear infinite;
         }
 
-        @keyframes twinkle {
-            0% { opacity: 0.3; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
+        /* 太阳系 */
+        .solar-system {
+            position: absolute;
+            top: 50%;
+            right: 15%;
+            width: 400px;
+            height: 400px;
+            transform: translateY(-50%);
         }
 
-        /* 主容器 */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, #ffd700 0%, #ff8c00 100%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 40px #ff4500;
+        }
+
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .planet-orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.05);
+            transform: translate(-50%, -50%);
+        }
+
+        /* 小行星带 */
+        .asteroid-belt {
+            position: absolute;
+            bottom: 20%;
+            left: 20%;
+            width: 300px;
+            height: 100px;
+            opacity: 0.2;
+        }
+
+        .asteroid {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: #888;
+            border-radius: 50%;
+        }
+
+        /* 流星 */
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: shootStar 3s linear infinite;
+        }
+
+        /* 星云 */
+        .nebula {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, 
+                rgba(138, 43, 226, 0.1) 0%,
+                rgba(75, 0, 130, 0.05) 50%,
+                transparent 100%);
+            filter: blur(20px);
+            opacity: 0.1;
+        }
+
+        /* 内容区域 */
+        .content {
             position: relative;
             z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            background: rgba(10, 15, 30, 0.3);
+            backdrop-filter: blur(10px);
+            min-height: 100vh;
         }
 
-        /* 头部 */
+        /* 标题样式 */
         .header {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
             padding-top: 2rem;
-            animation: fadeInDown 1.5s ease;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .welcome-title {
+        .site-title {
             font-size: 3.5rem;
             font-weight: 300;
             margin-bottom: 1.5rem;
+            color: #b0e0e6;
             letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(173, 216, 230, 0.7);
-            background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: titleGlow 3s infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px rgba(173, 216, 230, 0.5); }
-            100% { text-shadow: 0 0 30px rgba(173, 216, 230, 0.9), 0 0 40px rgba(173, 216, 230, 0.4); }
         }
 
         .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            color: #b0e0e6;
+            max-width: 700px;
+            margin: 0 auto;
+            color: #88aadd;
             font-weight: 300;
-            padding: 1rem;
-            border-left: 3px solid #ffd700;
-            background: rgba(0, 20, 40, 0.6);
-            border-radius: 0 10px 10px 0;
-            animation: fadeInUp 2s ease;
         }
 
-        /* 板块网格 */
-        .sections-grid {
+        /* 卡片设计 */
+        .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
         }
 
-        .section-card {
-            background: rgba(0, 10, 30, 0.7);
-            border: 1px solid rgba(173, 216, 230, 0.3);
-            border-radius: 15px;
+        .card {
+            background: rgba(20, 25, 50, 0.4);
+            border-radius: 12px;
             padding: 2.5rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            backdrop-filter: blur(10px);
-            min-height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(100, 150, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
         }
 
-        .section-card:hover {
-            transform: translateY(-10px);
-            border-color: #ffd700;
-            box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.5),
-                0 0 30px rgba(255, 215, 0, 0.3);
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(100, 150, 255, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
         }
 
-        .section-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #ffd700, #4a90e2, #ffd700);
-            animation: borderFlow 3s linear infinite;
-        }
-
-        @keyframes borderFlow {
-            0% { background-position: -200px 0; }
-            100% { background-position: 200px 0; }
-        }
-
-        .section-icon {
-            font-size: 3rem;
+        .card-icon {
+            font-size: 2.5rem;
+            color: #64ffda;
             margin-bottom: 1.5rem;
-            color: #ffd700;
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #fff;
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #ffffff;
             font-weight: 500;
         }
 
-        .section-title-jp {
-            font-size: 1.2rem;
-            color: #b0e0e6;
-            margin-bottom: 1.5rem;
-            font-weight: 300;
+        .card-subtitle {
+            font-size: 1rem;
+            color: #64ffda;
+            margin-bottom: 1rem;
+            font-weight: 400;
         }
 
-        .section-description {
-            color: #a0c8d0;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-            flex-grow: 1;
+        .card-desc {
+            color: #a0b0d0;
+            line-height: 1.7;
+            margin-bottom: 2rem;
         }
 
-        .section-button {
-            display: inline-block;
-            padding: 0.8rem 2rem;
-            background: rgba(255, 215, 0, 0.1);
-            color: #ffd700;
-            border: 1px solid #ffd700;
-            border-radius: 25px;
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            color: #64ffda;
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
+            font-weight: 500;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
         }
 
-        .section-button:hover {
-            background: rgba(255, 215, 0, 0.3);
-            transform: scale(1.05);
+        .card-link:hover {
+            gap: 0.8rem;
         }
 
-        /* 装饰元素 */
-        .floating-element {
-            position: fixed;
-            z-index: 0;
-            opacity: 0.1;
-            animation: float 20s infinite linear;
+        /* 动画 */
+        @keyframes rotateGalaxy {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes shootStar {
+            0% {
+                left: -100px;
+                top: 50%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                left: 100vw;
+                top: 30%;
+                opacity: 0;
+            }
         }
 
         @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
-        /* 底部 */
-        .footer {
-            text-align: center;
-            margin-top: 4rem;
-            padding: 2rem;
-            color: #88aadd;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(173, 216, 230, 0.2);
-        }
-
-        .cafe-logo {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        /* 响应式设计 */
+        /* 响应式 */
         @media (max-width: 768px) {
-            .welcome-title {
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .site-title {
                 font-size: 2.5rem;
             }
             
-            .subtitle {
-                font-size: 1.1rem;
-                padding: 0.8rem;
-            }
-            
-            .sections-grid {
+            .cards-grid {
                 grid-template-columns: 1fr;
             }
             
-            .section-card {
-                padding: 1.8rem;
+            .milky-way, .solar-system {
+                display: none;
             }
-        }
-
-        /* 霓虹灯效果 */
-        .neon-text {
-            text-shadow: 
-                0 0 5px #fff,
-                0 0 10px #fff,
-                0 0 15px #ffd700,
-                0 0 20px #ffd700,
-                0 0 25px #ffd700;
-        }
-
-        /* 滚动条美化 */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 20, 40, 0.5);
-        }
-        
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 215, 0, 0.3);
-            border-radius: 4px;
         }
     </style>
 </head>
 <body>
-    <!-- 太空背景 -->
-    <div id="space-background"></div>
-    <div class="stars" id="stars-container"></div>
+    <!-- 太空背景画布 -->
+    <div id="space-canvas">
+        <!-- 银河系 -->
+        <div class="milky-way"></div>
+        
+        <!-- 太阳系 -->
+        <div class="solar-system">
+            <div class="sun"></div>
+            <!-- 行星轨道 -->
+            <div class="planet-orbit" style="width: 120px; height: 120px;"></div>
+            <div class="planet-orbit" style="width: 180px; height: 180px;"></div>
+            <div class="planet-orbit" style="width: 240px; height: 240px;"></div>
+            <div class="planet-orbit" style="width: 320px; height: 320px;"></div>
+            <!-- 行星 -->
+            <div class="planet" style="width: 12px; height: 12px; background: #888; top: 50%; left: calc(50% + 60px);"></div>
+            <div class="planet" style="width: 20px; height: 20px; background: #deb887; top: calc(50% - 90px); left: 50%;"></div>
+        </div>
+        
+        <!-- 小行星带 -->
+        <div class="asteroid-belt" id="asteroids"></div>
+        
+        <!-- 星云 -->
+        <div class="nebula" style="top: 15%; right: 10%;"></div>
+        <div class="nebula" style="bottom: 10%; left: 15%; background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, rgba(0, 100, 150, 0.05) 50%, transparent 100%);"></div>
+        
+        <!-- 流星 -->
+        <div class="shooting-star" style="animation-delay: 0s;"></div>
+        <div class="shooting-star" style="animation-delay: 1.5s; top: 30%;"></div>
+        <div class="shooting-star" style="animation-delay: 3s; top: 70%;"></div>
+    </div>
 
-    <!-- 装饰性漂浮元素 -->
-    <div class="floating-element" style="top: 10%; left: 5%; font-size: 4rem;">☄️</div>
-    <div class="floating-element" style="top: 20%; right: 10%; font-size: 3rem;">🌟</div>
-    <div class="floating-element" style="bottom: 30%; left: 15%; font-size: 5rem;">🌌</div>
-
-    <div class="container">
-        <!-- 头部 -->
+    <!-- 内容 -->
+    <div class="content">
         <header class="header">
-            <h1 class="welcome-title neon-text">Welcome to the パラダイス・カフェ</h1>
+            <h1 class="site-title">Welcome to the パラダイス・カフェ</h1>
             <p class="subtitle">
                 ここはパラダイス・カフェ<br>
                 夜明けまで悩みのない客が<br>
@@ -313,133 +320,139 @@
             </p>
         </header>
 
-        <!-- 三个主要板块 -->
-        <div class="sections-grid">
-            <!-- 板块1: オリジナル日本語歌詞全集 -->
-            <div class="section-card" data-aos="fade-up">
-                <div class="section-icon">
-                    <i class="fas fa-book-open"></i>
+        <div class="cards-grid">
+            <!-- 歌詞全集 -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-book"></i>
                 </div>
-                <h2 class="section-title">Original Lyrics Collection</h2>
-                <h3 class="section-title-jp">中島みゆき オリジナル日本語歌詞全集</h3>
-                <p class="section-description">
-                    美雪の全オリジナル日本語歌詞を網羅したデジタルアーカイブ。<br>
-                    創作年代順に整理され、各作品の背景解説や関連エピソードを収録。
+                <h2 class="card-title">オリジナル日本語歌詞全集</h2>
+                <div class="card-subtitle">中島みゆき 全歌詞コレクション</div>
+                <p class="card-desc">
+                中島みゆきのデビュー以降の全楽曲（日本語原詞）及びその中国語訳詞をまとめたもの
                 </p>
-                <a href="#" class="section-button">
-                    <i class="fas fa-arrow-right"></i> コレクションを見る
+                <a href="#" class="card-link">
+                    コレクションを見る
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
-
-            <!-- 板块2: 館長の個人blog -->
-            <div class="section-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="section-icon">
-                    <i class="fas fa-feather-alt"></i>
+            
+            <!-- 館長ブログ -->
+            <div class="card">
+                <div class="card-icon">
+                    <i class="fas fa-feather"></i>
                 </div>
-                <h2 class="section-title">Curator's Blog</h2>
-                <h3 class="section-title-jp">館長の個人blog</h3>
-                <p class="section-description">
-                    パラダイス・カフェ館長による日記形式の考察録。<br>
-                    美雪作品の解釈、音楽論、文学的な分析など、<br>
+                <h2 class="card-title">館長の個人ブログ</h2>
+                <div class="card-subtitle">Curator's Personal Notes</div>
+                <p class="card-desc">
+                    パラダイス・カフェ館長による考察記録。
+                    作品解釈、音楽論、詩的表現の分析など、
                     深い洞察を共有する空間。
                 </p>
-                <a href="#" class="section-button">
-                    <i class="fas fa-arrow-right"></i> ブログを読む
+                <a href="#" class="card-link">
+                    ブログを読む
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
-
-            <!-- 板块3: 中島みゆき文書館 -->
-            <div class="section-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="section-icon">
+            
+            <!-- 文書館 -->
+            <div class="card">
+                <div class="card-icon">
                     <i class="fas fa-archive"></i>
                 </div>
-                <h2 class="section-title">Miyuki Archives</h2>
-                <h3 class="section-title-jp">中島みゆき文書館</h3>
-                <p class="section-description">
-                    貴重な資料、レア音源、歴史的記録を保管するデジタルライブラリ。<br>
-                    研究資料、インタビュー、未公開メモなど、<br>
-                    美雪研究のための総合アーカイブ。
+                <h2 class="card-title">中島みゆき文書館</h2>
+                <div class="card-subtitle">Miyuki Nakajima Archives</div>
+                <p class="card-desc">
+                中島みゆきの出版物（著書、詩集等）、インタビュー資料、年表などの関連資料を含む
                 </p>
-                <a href="#" class="section-button">
-                    <i class="fas fa-arrow-right"></i> アーカイブを探索
+                <a href="#" class="card-link">
+                    アーカイブを探索
+                    <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
-
-        <!-- 底部 -->
-        <footer class="footer">
-            <div class="cafe-logo">
-                <i class="fas fa-moon"></i> パラダイス・カフェ <i class="fas fa-star"></i>
-            </div>
-            <p>夜空に浮かぶ、永遠の音楽カフェ</p>
-            <p>© 2024 パラダイス・カフェ | 中島みゆき愛好家のための宇宙</p>
-        </footer>
     </div>
 
     <script>
+        // 创建小行星
+        function createAsteroids() {
+            const asteroidBelt = document.getElementById('asteroids');
+            for (let i = 0; i < 50; i++) {
+                const asteroid = document.createElement('div');
+                asteroid.classList.add('asteroid');
+                
+                const size = Math.random() * 2 + 1;
+                asteroid.style.width = `${size}px`;
+                asteroid.style.height = `${size}px`;
+                
+                asteroid.style.left = `${Math.random() * 100}%`;
+                asteroid.style.top = `${Math.random() * 100}%`;
+                
+                // 随机动画
+                const duration = Math.random() * 10 + 5;
+                asteroid.style.animation = `float ${duration}s ease-in-out infinite`;
+                asteroid.style.animationDelay = `${Math.random() * 5}s`;
+                
+                asteroidBelt.appendChild(asteroid);
+            }
+        }
+
         // 创建星星背景
         function createStars() {
-            const container = document.getElementById('stars-container');
-            for (let i = 0; i < 150; i++) {
+            const canvas = document.getElementById('space-canvas');
+            for (let i = 0; i < 200; i++) {
                 const star = document.createElement('div');
-                star.classList.add('star');
-                
-                // 随机大小
-                const size = Math.random() * 3 + 1;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
+                star.style.position = 'absolute';
+                star.style.width = '1px';
+                star.style.height = '1px';
+                star.style.backgroundColor = 'white';
+                star.style.borderRadius = '50%';
                 
                 // 随机位置
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
                 
-                // 随机动画时长
-                star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+                // 随机大小和亮度
+                const size = Math.random() * 2 + 0.5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.opacity = Math.random() * 0.5 + 0.3;
                 
-                // 随机亮度
-                star.style.opacity = Math.random() * 0.7 + 0.3;
+                // 闪烁效果
+                const duration = Math.random() * 3 + 2;
+                star.style.animation = `float ${duration}s ease-in-out infinite`;
                 
-                container.appendChild(star);
+                canvas.appendChild(star);
             }
         }
 
-        // 鼠标悬停效果
-        document.querySelectorAll('.section-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
-        });
-
-        // 页面加载效果
+        // 初始化
         window.addEventListener('load', function() {
             createStars();
+            createAsteroids();
             
-            // 标题逐字显示效果
-            const title = document.querySelector('.welcome-title');
-            const text = title.textContent;
-            title.textContent = '';
-            
-            let i = 0;
-            function typeWriter() {
-                if (i < text.length) {
-                    title.textContent += text.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 50);
-                }
-            }
-            
-            setTimeout(typeWriter, 1000);
+            // 卡片悬停效果
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
         });
 
-        // 滚动视差效果
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const stars = document.querySelector('.stars');
-            stars.style.transform = `translateY(${scrolled * 0.3}px)`;
+        // 鼠标移动视差效果
+        document.addEventListener('mousemove', function(e) {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            
+            document.querySelector('.milky-way').style.transform = 
+                `rotate(${Date.now() / 100}deg) translate(${x}px, ${y}px)`;
+            
+            document.querySelector('.solar-system').style.transform = 
+                `translateY(-50%) translate(${x * 0.5}px, ${y * 0.5}px)`;
         });
     </script>
 </body>
