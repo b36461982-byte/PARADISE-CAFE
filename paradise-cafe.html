@@ -24,19 +24,49 @@
             z-index: -1;
         }
         
-        /* 星星 */
+        /* 星星 - 明亮版 */
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
         }
         
-        /* 流星 */
+        /* 明亮的流星 */
         .meteor {
             position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, rgba(255,255,255,0.8), transparent);
+            height: 2px;
+            background: linear-gradient(90deg, #ffffff, #ffff00, transparent);
             transform: rotate(-45deg);
+            filter: drop-shadow(0 0 5px yellow);
+        }
+        
+        /* 星云 - 梦幻效果 */
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.3;
+            animation: nebulaGlow 15s ease-in-out infinite alternate;
+        }
+        
+        /* 星河 - 银河带 */
+        .milky-way {
+            position: absolute;
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                rgba(200, 200, 255, 0.1),
+                rgba(255, 200, 255, 0.1),
+                rgba(200, 200, 255, 0.1),
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            transform: rotate(15deg);
+            top: 30%;
+            left: -50%;
+            filter: blur(20px);
         }
         
         /* 内容容器 */
@@ -49,34 +79,41 @@
             text-align: center;
         }
         
-        /* 标题 - 紫色到蓝色渐变 */
+        /* 标题 - 更鲜艳的彩虹色 */
         h1 {
             font-size: 4em;
             margin-bottom: 30px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
+            background: linear-gradient(90deg, 
+                #ff00ff, #ff0080, #ff0000, #ff8000, 
+                #ffff00, #00ff00, #00ffff, #0080ff, 
+                #0000ff, #8000ff, #ff00ff
+            );
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            background-size: 400% 400%;
-            animation: rainbow 8s ease infinite;
+            background-size: 300% 300%;
+            animation: rainbow 5s linear infinite;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
         
-        /* 副标题 - 彩虹色 */
+        /* 副标题 - 发光效果 */
         .subtitle {
             font-size: 1.5em;
             line-height: 2;
             margin-bottom: 60px;
             background: linear-gradient(90deg, 
                 #ff0000, #ff9900, #ffff00, #00ff00, 
-                #00ffff, #0000ff, #ff00ff);
+                #00ffff, #0000ff, #ff00ff
+            );
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             background-size: 400% 400%;
-            animation: rainbow 6s ease infinite;
+            animation: rainbow 4s linear infinite;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
         }
         
-        /* 三个板块 */
+        /* 三个板块 - 带发光边框 */
         .sections {
             display: flex;
             flex-wrap: wrap;
@@ -86,12 +123,24 @@
         }
         
         .section {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.08);
             padding: 30px;
             width: 300px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(255, 255, 255, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 15px 40px rgba(255, 255, 255, 0.2),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
         }
         
         .section h2 {
@@ -101,28 +150,40 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            text-shadow: 0 0 10px rgba(255, 0, 255, 0.3);
         }
         
         .section p {
             font-size: 1.1em;
             color: #ccccff;
             margin-bottom: 20px;
+            text-shadow: 0 0 5px rgba(204, 204, 255, 0.3);
         }
         
         .section a {
             color: #ffff00;
             text-decoration: none;
             font-size: 1.1em;
+            text-shadow: 0 0 10px yellow;
+            transition: all 0.3s;
         }
         
-        /* 彩虹动画 */
+        .section a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 15px white;
+        }
+        
+        /* 动画 */
         @keyframes rainbow {
             0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
         }
         
-        /* 流星动画 */
+        @keyframes nebulaGlow {
+            0% { opacity: 0.2; transform: scale(1); }
+            100% { opacity: 0.4; transform: scale(1.1); }
+        }
+        
         @keyframes meteor {
             0% {
                 left: -100px;
@@ -130,10 +191,10 @@
                 opacity: 0;
             }
             10% {
-                opacity: 0.8;
+                opacity: 1;
             }
             90% {
-                opacity: 0.8;
+                opacity: 1;
             }
             100% {
                 left: 100vw;
@@ -141,10 +202,16 @@
                 opacity: 0;
             }
         }
+        
+        /* 星星闪烁动画 */
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
     </style>
 </head>
 <body>
-    <!-- 太空背景容器 - 只有星星和流星 -->
+    <!-- 太空背景容器 - 明亮的星河 -->
     <div id="space"></div>
     
     <!-- 内容 -->
@@ -161,19 +228,19 @@
             <div class="section">
                 <h2>中島みゆき オリジナル日本語歌詞全集</h2>
                 <p>全歌詞を網羅したデジタルアーカイブ</p>
-                <a href="#">見る →</a>
+                <a href="#">✨ 見る →</a>
             </div>
             
             <div class="section">
                 <h2>館長の個人blog</h2>
                 <p>館長による考察記録</p>
-                <a href="#">読む →</a>
+                <a href="#">✨ 読む →</a>
             </div>
             
             <div class="section">
                 <h2>中島みゆき文書館</h2>
                 <p>研究資料の総合アーカイブ</p>
-                <a href="#">探索 →</a>
+                <a href="#">✨ 探索 →</a>
             </div>
         </div>
     </div>
@@ -181,65 +248,134 @@
     <script>
         const space = document.getElementById('space');
         
-        // 创建星星（1200颗，自然的星空）
-        for (let i = 0; i < 1200; i++) {
+        // 1. 创建明亮的星星（1500颗，更亮更多）
+        for (let i = 0; i < 1500; i++) {
             const star = document.createElement('div');
             star.className = 'star';
             
-            // 随机大小（0.3-1.5像素，大多数很小）
-            const size = Math.random() * 1.2 + 0.3;
+            // 随机大小（0.5-3像素，更大的星星）
+            const size = Math.random() * 2.5 + 0.5;
             star.style.width = star.style.height = size + 'px';
             
             // 随机位置
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
             
-            // 随机亮度（模拟真实星空）
+            // 明亮的星星（大部分更亮）
             const brightness = Math.random();
-            if (brightness < 0.7) {
-                star.style.opacity = Math.random() * 0.3 + 0.1; // 70%暗星
-            } else if (brightness < 0.9) {
-                star.style.opacity = Math.random() * 0.4 + 0.3; // 20%中等亮度
+            if (brightness < 0.4) {
+                star.style.opacity = Math.random() * 0.4 + 0.6; // 40%亮星
+            } else if (brightness < 0.8) {
+                star.style.opacity = Math.random() * 0.3 + 0.3; // 40%中等
             } else {
-                star.style.opacity = Math.random() * 0.3 + 0.7; // 10%亮星
+                star.style.opacity = Math.random() * 0.3 + 0.1; // 20%暗星（点缀）
             }
             
-            // 随机闪烁（只有20%的星星闪烁）
-            if (Math.random() > 0.8) {
-                const duration = Math.random() * 3 + 2;
-                const delay = Math.random() * 5;
-                star.style.animation = `rainbow ${duration}s ease-in-out infinite ${delay}s`;
+            // 随机颜色（少数星星有颜色）
+            if (Math.random() > 0.9) {
+                const colors = ['#ff5555', '#55ff55', '#5555ff', '#ffff55', '#ff55ff', '#55ffff'];
+                star.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            }
+            
+            // 闪烁动画（30%的星星闪烁）
+            if (Math.random() > 0.7) {
+                const duration = Math.random() * 2 + 1;
+                const delay = Math.random() * 3;
+                star.style.animation = `twinkle ${duration}s ease-in-out infinite ${delay}s`;
             }
             
             space.appendChild(star);
         }
         
-        // 创建流星（很少，自然出现）
-        for (let i = 0; i < 4; i++) {
+        // 2. 创建明亮的流星（金色）
+        for (let i = 0; i < 8; i++) {
             const meteor = document.createElement('div');
             meteor.className = 'meteor';
             
-            // 随机位置
-            const startX = Math.random() * 30; // 从左侧开始
+            // 随机起始位置
+            const startX = Math.random() * 20;
             const startY = Math.random() * 100;
             meteor.style.left = startX + '%';
             meteor.style.top = startY + '%';
             
-            // 随机长度（80-150px）
-            const length = Math.random() * 70 + 80;
+            // 随机长度（100-250px，更长更亮）
+            const length = Math.random() * 150 + 100;
             meteor.style.width = length + 'px';
             
-            // 随机亮度
-            const meteorBrightness = Math.random() * 0.4 + 0.4;
-            meteor.style.background = `linear-gradient(90deg, rgba(255,255,255,${meteorBrightness}), transparent)`;
+            // 随机颜色（金、蓝、紫）
+            const colors = [
+                'linear-gradient(90deg, #ffffff, #ffff00, transparent)',
+                'linear-gradient(90deg, #ffffff, #00ffff, transparent)',
+                'linear-gradient(90deg, #ffffff, #ff00ff, transparent)'
+            ];
+            meteor.style.background = colors[Math.floor(Math.random() * colors.length)];
             
             // 随机速度和延迟
-            const speed = Math.random() * 2 + 1.5;
-            const delay = Math.random() * 40 + 10; // 10-50秒后才出现
+            const speed = Math.random() * 1.5 + 1;
+            const delay = Math.random() * 20 + 5; // 5-25秒出现
             meteor.style.animation = `meteor ${speed}s linear infinite`;
             meteor.style.animationDelay = delay + 's';
             
             space.appendChild(meteor);
+        }
+        
+        // 3. 创建梦幻星云
+        const nebulaColors = [
+            ['rgba(255, 100, 255, 0.3)', 'rgba(200, 50, 255, 0.2)'], // 紫色星云
+            ['rgba(100, 200, 255, 0.3)', 'rgba(50, 150, 255, 0.2)'], // 蓝色星云
+            ['rgba(255, 200, 100, 0.3)', 'rgba(255, 150, 50, 0.2)'], // 橙色星云
+            ['rgba(100, 255, 200, 0.3)', 'rgba(50, 255, 150, 0.2)'], // 青色星云
+        ];
+        
+        for (let i = 0; i < 4; i++) {
+            const nebula = document.createElement('div');
+            nebula.className = 'nebula';
+            
+            // 随机大小（200-500像素）
+            const size = Math.random() * 300 + 200;
+            nebula.style.width = nebula.style.height = size + 'px';
+            
+            // 随机位置
+            nebula.style.left = Math.random() * 80 + 10 + '%';
+            nebula.style.top = Math.random() * 80 + 10 + '%';
+            
+            // 渐变颜色
+            const [color1, color2] = nebulaColors[i];
+            nebula.style.background = `radial-gradient(circle, ${color1} 0%, ${color2} 50%, transparent 100%)`;
+            
+            // 随机动画
+            const duration = Math.random() * 10 + 10;
+            const delay = Math.random() * 5;
+            nebula.style.animation = `nebulaGlow ${duration}s ease-in-out infinite alternate ${delay}s`;
+            
+            space.appendChild(nebula);
+        }
+        
+        // 4. 创建星河（银河带）
+        const milkyWay = document.createElement('div');
+        milkyWay.className = 'milky-way';
+        space.appendChild(milkyWay);
+        
+        // 5. 添加一些星团（星星密集区）
+        for (let i = 0; i < 3; i++) {
+            const clusterX = Math.random() * 80 + 10;
+            const clusterY = Math.random() * 80 + 10;
+            
+            for (let j = 0; j < 50; j++) {
+                const clusterStar = document.createElement('div');
+                clusterStar.className = 'star';
+                
+                clusterStar.style.width = clusterStar.style.height = '1px';
+                clusterStar.style.left = (clusterX + Math.random() * 10 - 5) + '%';
+                clusterStar.style.top = (clusterY + Math.random() * 10 - 5) + '%';
+                clusterStar.style.opacity = Math.random() * 0.5 + 0.5;
+                
+                // 星团中的星星更密集地闪烁
+                const duration = Math.random() * 1 + 0.5;
+                clusterStar.style.animation = `twinkle ${duration}s ease-in-out infinite`;
+                
+                space.appendChild(clusterStar);
+            }
         }
     </script>
 </body>
