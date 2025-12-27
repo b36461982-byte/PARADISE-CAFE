@@ -244,9 +244,10 @@
         </div>
     </div>
     
-    <!-- 隐形音乐系统 -->
+    <!-- 隐形音乐系统 - 已修复音频链接 -->
     <audio id="invisible-bgm" loop preload="auto" style="display: none;">
-        <source src="https://b36461982-byte.github.io/PARADISE-CAFE/%E3%83%8F%E3%82%9A%E3%83%A9%E3%82%BF%E3%82%99%E3%82%A4%E3%82%B9%E3%83%BB%E3%82%AB%E3%83%95%E3%82%A7.mp3" type="audio/mpeg">
+        <!-- 重要：已修改为新用户名 -->
+        <source src="https://thecuratorofparadisecafe.github.io/PARADISE-CAFE/%E3%83%8F%E3%82%9A%E3%83%A9%E3%82%BF%E3%82%99%E3%82%A4%E3%82%B9%E3%83%BB%E3%82%AB%E3%83%95%E3%82%A7.mp3" type="audio/mpeg">
     </audio>
     
     <div id="music-hint" style="
@@ -346,35 +347,11 @@
     const bgm = document.getElementById('invisible-bgm');
     const musicHint = document.getElementById('music-hint');
     
+    // 添加更可靠的自动播放策略
+    let audioInitialized = false;
+    
     // 设置背景音乐音量（较低，不干扰）
     bgm.volume = 0.2;
-    
-    // 优雅的自动播放策略
-    function startBackgroundMusic() {
-        // 尝试自动播放
-        const playPromise = bgm.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                // 播放成功
-                console.log('🎵 パラダイス・カフェ 开始播放');
-                showMusicHint('🎵 パラダイス・カフェ 再生中', '#00ff00');
-            }).catch(error => {
-                // 自动播放被阻止
-                console.log('音乐自动播放被阻止，等待用户交互');
-                showMusicHint('🎵 クリックして再生', '#ff9900');
-                
-                // 等待用户第一次点击
-                document.addEventListener('click', function startOnClick() {
-                    bgm.play().then(() => {
-                        showMusicHint('🎵 再生開始', '#00ff00');
-                    });
-                    // 只执行一次
-                    document.removeEventListener('click', startOnClick);
-                }, { once: true });
-            });
-        }
-    }
     
     // 显示短暂的音乐提示
     function showMusicHint(text, color) {
@@ -388,10 +365,104 @@
         }, 3000);
     }
     
-    // 页面加载后开始音乐
+    // 尝试自动播放
+    function tryAutoPlay() {
+        if (audioInitialized) return;
+        
+        const playPromise = bgm.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                // 播放成功
+                audioInitialized = true;
+                console.log('🎵 パラダイス・カフェ 自动播放成功');
+                showMusicHint('🎵 パラダイス・カフェ 再生中', '#00ff00');
+            }).catch(error => {
+                // 自动播放被阻止
+                console.log('自动播放被阻止，显示提示');
+                showMusicHint('🎵 点击页面开始音乐', '#ff9900');
+                
+                // 添加点击播放提示
+                const playPrompt = document.createElement('div');
+                playPrompt.innerHTML = '🎵 点击任意处播放《パラダイス・カフェ》';
+                playPrompt.style.cssText = `
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: rgba(0,0,0,0.85);
+                    color: #ffd700;
+                    padding: 20px 30px;
+                    border-radius: 15px;
+                    border: 2px solid #ffd700;
+                    z-index: 1001;
+                    text-align: center;
+                    cursor: pointer;
+                    backdrop-filter: blur(10px);
+                    font-size: 1.1em;
+                    box-shadow: 0 0 30px rgba(255,215,0,0.3);
+                    animation: pulse 2s infinite;
+                `;
+                
+                // 添加脉动动画
+                const pulseStyle = document.createElement('style');
+                pulseStyle.textContent = `
+                    @keyframes pulse {
+                        0% { transform: translate(-50%, -50%) scale(1); }
+                        50% { transform: translate(-50%, -50%) scale(1.05); }
+                        100% { transform: translate(-50%, -50%) scale(1); }
+                    }
+                `;
+                document.head.appendChild(pulseStyle);
+                
+                document.body.appendChild(playPrompt);
+                
+                // 点击提示开始播放
+                playPrompt.addEventListener('click', function() {
+                    bgm.play().then(() => {
+                        audioInitialized = true;
+                        showMusicHint('🎵 再生開始', '#00ff00');
+                        this.remove();
+                    });
+                });
+                
+                // 页面任意位置点击也开始播放
+                document.addEventListener('click', function startOnInteraction() {
+                    if (!audioInitialized) {
+                        bgm.play().then(() => {
+                            audioInitialized = true;
+                            showMusicHint('🎵 再生開始', '#00ff00');
+                            if (playPrompt.parentNode) {
+                                playPrompt.remove();
+                            }
+                        });
+                    }
+                    document.removeEventListener('click', startOnInteraction);
+                }, { once: true });
+            });
+        }
+    }
+    
+    // 页面加载后尝试播放
     window.addEventListener('load', function() {
-        // 等待1秒，让页面先加载
-        setTimeout(startBackgroundMusic, 1000);
+        // 等待页面完全加载
+        setTimeout(() => {
+            // 先检查音频文件是否存在
+            fetch(bgm.src)
+                .then(response => {
+                    if (response.ok) {
+                        console.log('✅ 音频文件可访问');
+                        tryAutoPlay();
+                    } else {
+                        console.log('❌ 音频文件不存在或无法访问');
+                        showMusicHint('🎵 音乐文件加载失败', '#ff5555');
+                    }
+                })
+                .catch(error => {
+                    console.log('❌ 音频文件加载错误:', error);
+                    showMusicHint('🎵 音乐加载错误', '#ff5555');
+                });
+        }, 1000);
     });
     
     // 键盘快捷键控制
@@ -500,7 +571,8 @@
         showMusicHint(`音量: ${Math.round(bgm.volume * 100)}%`, '#ffff00');
     });
     
-    console.log('✨ パラダイス・カフェ ページロード完了');
+    console.log('✨ パラダイス・カフェ 页面加载完成');
+    console.log('🎵 音频文件:', bgm.src);
     </script>
 </body>
 </html>
